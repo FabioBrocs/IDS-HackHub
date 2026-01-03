@@ -15,7 +15,6 @@ import unicam.idshackhub.utlities.Finished;
 @Finished
 //TODO JPA
 public class Invite {
-    long id;
     User owner;
     String description;
     User arrival;
