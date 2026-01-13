@@ -1,12 +1,11 @@
-package unicam.idshackhub.user;
+package unicam.idshackhub.model.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-import unicam.idshackhub.role.GlobalRole;
-import unicam.idshackhub.role.Role;
+import unicam.idshackhub.model.user.role.GlobalRole;
+import unicam.idshackhub.model.user.role.Role;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.Optional;
 @Setter
 @Getter
 @Entity
-@Embeddable
 @Table(name = "Users")
 public class User {
 
@@ -24,7 +22,6 @@ public class User {
 	private String email;
 	private String passwordHash;
 	private GlobalRole role;
-	//TODO FIX
 	@Transient private List<Assignment> assignments = new ArrayList<>();
 
 	@Override

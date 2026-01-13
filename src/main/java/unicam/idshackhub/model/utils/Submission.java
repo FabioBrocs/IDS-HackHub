@@ -1,12 +1,14 @@
-package unicam.idshackhub.hackathon.submission;
+package unicam.idshackhub.model.utils;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import unicam.idshackhub.team.HackathonTeam;
+import unicam.idshackhub.model.team.HackathonTeam;
 
 @Getter
 @Setter
@@ -14,7 +16,10 @@ import unicam.idshackhub.team.HackathonTeam;
 @NoArgsConstructor
 @Entity
 public class Submission {
-	@Id private HackathonTeam team;
+	@Id
+	@OneToOne(optional = false)
+	@JoinColumn(name = "team_id", nullable = false)
+	private HackathonTeam team;
 	private String description;
 	private Integer vote;
 

@@ -1,16 +1,10 @@
-package unicam.idshackhub.hackathon.state;
+package unicam.idshackhub.model.hackathon.state;
 
-import unicam.idshackhub.hackathon.Hackathon;
-import unicam.idshackhub.role.permission.Permission;
-import unicam.idshackhub.utlities.Finished;
+import unicam.idshackhub.model.hackathon.Hackathon;
+import unicam.idshackhub.model.user.role.permission.Permission;
 
-@Finished
 public class Progress implements HackathonState {
 
-	/**
-	 * 
-	 * @param perm
-	 */
 	public boolean isActionAllowed(Permission perm) {
 		return switch (perm){
 			case Can_Submit -> true;

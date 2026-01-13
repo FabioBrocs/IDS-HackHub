@@ -1,12 +1,14 @@
-package unicam.idshackhub.hackathon;
+package unicam.idshackhub.model.hackathon;
 
+import jakarta.persistence.Embeddable;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import unicam.idshackhub.utlities.Finished;
 
 @Getter
 @Setter
-@Finished
+@NoArgsConstructor
+@Embeddable
 public class TeamRules {
     private int maxTeams;
     private int minTeams;

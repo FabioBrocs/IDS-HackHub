@@ -1,12 +1,10 @@
-package unicam.idshackhub.role;
+package unicam.idshackhub.model.user.role;
 
-import unicam.idshackhub.role.permission.Permission;
-import unicam.idshackhub.utlities.Finished;
+import unicam.idshackhub.model.user.role.permission.Permission;
 
 import java.util.EnumSet;
 import java.util.Set;
 
-@Finished
 public enum TeamRole implements Role {
 	TeamMember(EnumSet.noneOf(Permission.class)),
 	TeamLeader(EnumSet.of(Permission.Can_Registrate_Team));

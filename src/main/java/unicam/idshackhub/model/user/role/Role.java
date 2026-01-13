@@ -1,6 +1,6 @@
-package unicam.idshackhub.role;
+package unicam.idshackhub.model.user.role;
 
-import unicam.idshackhub.role.permission.Permission;
+import unicam.idshackhub.model.user.role.permission.Permission;
 
 import java.util.List;
 

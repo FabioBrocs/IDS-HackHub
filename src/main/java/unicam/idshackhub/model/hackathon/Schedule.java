@@ -1,14 +1,16 @@
-package unicam.idshackhub.hackathon;
+package unicam.idshackhub.model.hackathon;
 
+import jakarta.persistence.Embeddable;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import unicam.idshackhub.utlities.Finished;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Finished
+@NoArgsConstructor
+@Embeddable
 public class Schedule {
     private LocalDateTime startRegistrationDate;
     private LocalDateTime startDate;

@@ -1,11 +1,9 @@
 package unicam.idshackhub.service;
 
-import unicam.idshackhub.user.User;
-import unicam.idshackhub.user.Context;
-import unicam.idshackhub.role.permission.Permission;
-import unicam.idshackhub.utlities.Finished;
+import unicam.idshackhub.model.user.User;
+import unicam.idshackhub.model.user.Context;
+import unicam.idshackhub.model.user.role.permission.Permission;
 
-@Finished
 public class PermissionChecker {
 	/**
 	 * 

@@ -1,4 +1,4 @@
-package unicam.idshackhub.team;
+package unicam.idshackhub.model.team;
 
 import jakarta.persistence.Entity;
 import lombok.Getter;
@@ -8,11 +8,5 @@ import lombok.Setter;
 @Getter
 @Entity
 public class Team extends AbstractTeam {
-
 	private String iban;
-
-	@Override
-	public String getScopeName() {
-		return "";
-	}
 }

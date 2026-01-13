@@ -1,15 +1,12 @@
-package unicam.idshackhub.hackathon;
+package unicam.idshackhub.model.hackathon;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
-import unicam.idshackhub.hackathon.state.HackathonState;
-import unicam.idshackhub.hackathon.state.Registration;
-import unicam.idshackhub.hackathon.submission.Submission;
-import unicam.idshackhub.team.HackathonTeam;
-import unicam.idshackhub.user.Context;
+import unicam.idshackhub.model.hackathon.state.HackathonState;
+import unicam.idshackhub.model.hackathon.state.Registration;
+import unicam.idshackhub.model.utils.Submission;
+import unicam.idshackhub.model.team.HackathonTeam;
+import unicam.idshackhub.model.user.Context;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +15,9 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
-//TODO FIX ENTITY JPA
+@NoArgsConstructor
+@AllArgsConstructor
+//TODO FIX attributi Transient
 public class Hackathon implements Context {
 	@Setter(AccessLevel.NONE) @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private long id;
 	private String title;
@@ -26,9 +25,10 @@ public class Hackathon implements Context {
 	private TeamRules rules;
 	private HackathonStaff staff;
 	private Schedule schedule;
-	@Builder.Default private List<HackathonTeam> teams = new ArrayList<>();
+	@Transient @Builder.Default private List<HackathonTeam> teams = new ArrayList<>();
+	@Transient @Builder.Default private List<Submission> submissions = new ArrayList<>();
+	//anche se non da errore subito dovrebbe rompersi per lo stesso motivo di assignment
 	@Builder.Default private HackathonState actualState = new Registration();
-	@Builder.Default private List<Submission> submissions = new ArrayList<>();
 
 	/**
 	 * 
@@ -38,10 +38,6 @@ public class Hackathon implements Context {
 		this.actualState = newState;
 	}
 
-	@Override
-	public String getScopeName() {
-		return "HACKATHON";
-	}
 
 	public void deleteHackathon() {
 		this.actualState = null;

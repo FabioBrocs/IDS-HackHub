@@ -1,10 +1,8 @@
-package unicam.idshackhub.hackathon.state;
+package unicam.idshackhub.model.hackathon.state;
 
-import unicam.idshackhub.hackathon.Hackathon;
-import unicam.idshackhub.role.permission.Permission;
-import unicam.idshackhub.utlities.Finished;
+import unicam.idshackhub.model.hackathon.Hackathon;
+import unicam.idshackhub.model.user.role.permission.Permission;
 
-@Finished
 public class Valutation implements HackathonState {
 
 	/**

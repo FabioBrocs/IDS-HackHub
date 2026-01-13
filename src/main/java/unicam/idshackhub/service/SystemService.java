@@ -1,18 +1,17 @@
 package unicam.idshackhub.service;
 
-import unicam.idshackhub.hackathon.Hackathon;
-import unicam.idshackhub.hackathon.HackathonStaff;
-import unicam.idshackhub.hackathon.Schedule;
-import unicam.idshackhub.hackathon.TeamRules;
-import unicam.idshackhub.role.HackathonRole;
-import unicam.idshackhub.role.permission.Permission;
-import unicam.idshackhub.service.utils.Invite;
-import unicam.idshackhub.service.utils.Request;
+import unicam.idshackhub.model.hackathon.Hackathon;
+import unicam.idshackhub.model.hackathon.HackathonStaff;
+import unicam.idshackhub.model.hackathon.TeamRules;
+import unicam.idshackhub.model.user.role.HackathonRole;
+import unicam.idshackhub.model.user.role.permission.Permission;
+import unicam.idshackhub.model.utils.Invite;
+import unicam.idshackhub.model.utils.Request;
 import unicam.idshackhub.team.builder.TeamBuilder;
-import unicam.idshackhub.user.Assignment;
-import unicam.idshackhub.user.User;
+import unicam.idshackhub.model.user.Assignment;
+import unicam.idshackhub.model.user.User;
 
-import java.util.Optional;
+import java.util.ArrayList;
 
 public class SystemService extends Service {
 
@@ -68,10 +67,15 @@ public class SystemService extends Service {
 		}else throw new RuntimeException("Permission denied");
 	}
 
+	//TODO in teoria basta aggiungere nome, description e iban
 	public void createTeam(User user) {
 		if(checker.checkPermission(user, Permission.Can_Create_Team)){
 			TeamBuilder builder = new TeamBuilder();
-			//TODO INSERIRE BUILDER TEAM
+			builder.buildName("example")
+					.buildDescription("example")
+					.buildLeader(user)
+					.buildMembers(new ArrayList<>())
+					.buildIban("example");
 		}else throw new RuntimeException("Permission denied");
 	}
 

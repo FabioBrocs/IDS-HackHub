@@ -1,13 +1,11 @@
-package unicam.idshackhub.role;
+package unicam.idshackhub.model.user.role;
 
-import unicam.idshackhub.role.permission.Permission;
-import unicam.idshackhub.utlities.Finished;
+import unicam.idshackhub.model.user.role.permission.Permission;
 
 import java.util.List;
 import java.util.EnumSet;
 import java.util.Set;
 
-@Finished
 public enum GlobalRole implements Role {
 	VerifiedUser(EnumSet.of(Permission.Can_Create_Hackathon)),
 	SystemAdmin(EnumSet.of(Permission.Can_Manage_Request)),

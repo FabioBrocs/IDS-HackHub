@@ -1,27 +1,14 @@
 package unicam.idshackhub.team.builder;
 
-import unicam.idshackhub.team.AbstractTeam;
-import unicam.idshackhub.user.User;
+import unicam.idshackhub.model.team.AbstractTeam;
+import unicam.idshackhub.model.user.User;
 
-public interface ITeamBuilder<T extends AbstractTeam>  {
-    /**
-     *
-     * @param name
-     */
+import java.util.List;
+
+public interface ITeamBuilder<V extends AbstractTeam, T extends ITeamBuilder<V, T>>  {
     T buildName(String name);
-
-    /**
-     *
-     * @param description
-     */
     T buildDescription(String description);
-
-
-    /**
-     *
-     * @param leader
-     */
     T buildLeader(User leader);
-
-    T getTeam();
+    T buildMembers(List<User> members);
+    V getTeam();
 }

@@ -1,32 +1,46 @@
 package unicam.idshackhub.team.builder;
 
-import unicam.idshackhub.team.AbstractTeam;
-import unicam.idshackhub.user.User;
+import unicam.idshackhub.model.team.AbstractTeam;
+import unicam.idshackhub.model.user.User;
 
-public class TeamBuilderAbstract<T extends AbstractTeam> implements ITeamBuilder{
+import java.util.List;
 
-    private T result;
+public abstract class TeamBuilderAbstract<V extends AbstractTeam, T extends TeamBuilderAbstract<V, T>> implements ITeamBuilder<V, T> {
+
+    protected V team;
+    protected abstract V createTeamInstance();
 
     @Override
     public T buildName(String name) {
-        result.setName(name);
-        return result;
+        team.setName(name);
+        return self();
     }
 
     @Override
     public T buildDescription(String description) {
-        result.setDescription(description);
-        return result;
+        team.setDescription(description);
+        return self();
     }
 
     @Override
     public T buildLeader(User leader) {
-        result.setLeader(leader);
-        return result;
+        team.setLeader(leader);
+        return self();
     }
 
     @Override
-    public T getTeam() {
-        return result;
+    public T buildMembers(List<User> members) {
+        team.setMembers(members);
+        return self();
+    }
+
+    @Override
+    public V getTeam() {
+        return team;
+    }
+
+    @SuppressWarnings("unchecked")
+    protected T self() {
+        return (T) this;
     }
 }

@@ -1,9 +1,9 @@
 package unicam.idshackhub.service;
 
-import unicam.idshackhub.role.permission.Permission;
-import unicam.idshackhub.service.utils.Invite;
-import unicam.idshackhub.user.User;
-import unicam.idshackhub.hackathon.Hackathon;
+import unicam.idshackhub.model.user.role.permission.Permission;
+import unicam.idshackhub.model.utils.Invite;
+import unicam.idshackhub.model.user.User;
+import unicam.idshackhub.model.hackathon.Hackathon;
 
 public class HackathonService extends Service {
 

@@ -1,14 +1,10 @@
-package unicam.idshackhub.hackathon.state;
+package unicam.idshackhub.model.hackathon.state;
 
-import unicam.idshackhub.hackathon.Hackathon;
-import unicam.idshackhub.role.permission.Permission;
+import unicam.idshackhub.model.hackathon.Hackathon;
+import unicam.idshackhub.model.user.role.permission.Permission;
 
 public class Conclusion implements HackathonState {
 
-	/**
-	 * 
-	 * @param perm
-	 */
 	public boolean isActionAllowed(Permission perm) {
 		return switch (perm){
 			case Can_Proclamate_Winner -> true;

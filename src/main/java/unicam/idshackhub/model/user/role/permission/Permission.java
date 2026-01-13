@@ -1,4 +1,4 @@
-package unicam.idshackhub.role.permission;
+package unicam.idshackhub.model.user.role.permission;
 
 //TODO CHECK SE TUTTI PRESENTI
 public enum Permission {

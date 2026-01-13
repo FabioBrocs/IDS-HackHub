@@ -1,13 +1,11 @@
-package unicam.idshackhub.role;
+package unicam.idshackhub.model.user.role;
 
-import unicam.idshackhub.role.permission.Permission;
-import unicam.idshackhub.utlities.Finished;
+import unicam.idshackhub.model.user.role.permission.Permission;
 
 import java.util.List;
 import java.util.EnumSet;
 import java.util.Set;
 
-@Finished
 public enum HackathonRole implements Role {
 	Judge(EnumSet.of(Permission.Can_Vote,Permission.Can_End_Valutation_State)),
 	Organizator(EnumSet.of(Permission.Can_Proclamate_Winner,Permission.Can_Invite_Judge)),

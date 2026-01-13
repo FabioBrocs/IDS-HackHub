@@ -2,7 +2,7 @@ package unicam.idshackhub;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import unicam.idshackhub.user.User;
+import unicam.idshackhub.model.user.User;
 
 @SpringBootApplication
 public class IdsHackHubApplication {

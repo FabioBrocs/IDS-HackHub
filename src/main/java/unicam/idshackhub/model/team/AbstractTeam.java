@@ -1,10 +1,10 @@
-package unicam.idshackhub.team;
+package unicam.idshackhub.model.team;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import unicam.idshackhub.user.Context;
-import unicam.idshackhub.user.User;
+import unicam.idshackhub.model.user.Context;
+import unicam.idshackhub.model.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,5 @@ public abstract class AbstractTeam implements Context {
     private String name;
     private String description;
     @OneToOne private User leader;
-    @ElementCollection private List<User> members = new ArrayList<>();
-
-    @Override
-    public abstract String getScopeName();
+    @Transient private List<User> members = new ArrayList<>();
 }

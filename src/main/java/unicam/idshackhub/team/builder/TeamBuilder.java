@@ -1,12 +1,16 @@
 package unicam.idshackhub.team.builder;
 
-import unicam.idshackhub.team.Team;
+import unicam.idshackhub.model.team.Team;
 
-public class TeamBuilder extends TeamBuilderAbstract {
-    private Team result;
+public class TeamBuilder extends TeamBuilderAbstract<Team, TeamBuilder> {
 
-    public Team buildIban(String iban){
-        result.setIban(iban);
-        return result;
+    @Override
+    protected Team createTeamInstance() {
+        return new Team();
+    }
+
+    public TeamBuilder buildIban(String iban) {
+        team.setIban(iban);
+        return this;
     }
 }
