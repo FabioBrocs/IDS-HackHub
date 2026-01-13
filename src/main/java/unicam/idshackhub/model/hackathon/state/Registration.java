@@ -17,7 +17,6 @@ public class Registration implements HackathonState {
 	public void updateState(Hackathon context) {
 		if(context.getStaff().getJudge() != null){
 			if(context.getRules().getMinTeams()<=context.getTeams().size()){
-				System.out.println("tutte le condizioni sono stati soddisfatte, l'hackathon verrà fatto partire");
 				context.changeState(new Progress());
 			}throw new SecurityException("non è stato raggiunto il numero minimo di team l'hackathon verrà annullato");
 		}throw new SecurityException("giudice non presente, l'hackathon verrà annullato");

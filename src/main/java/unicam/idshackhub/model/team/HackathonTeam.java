@@ -16,5 +16,4 @@ public class HackathonTeam extends AbstractTeam{
 	@ManyToOne @JoinColumn(name = "main_team_id") private Team mainTeam;
 	@ManyToOne @JoinColumn(name = "hackathon_participation_id") private Hackathon hackathonParticipation;
 	@OneToOne private Submission submission;
-
 }

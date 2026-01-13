@@ -20,7 +20,7 @@ public class PermissionChecker {
 
 	public boolean checkPermission(User user, Permission perm) {
 		if (user == null || perm == null) return false;
-		return user.getRole().hasPermission(perm);
+		return user.getGlobalRole().hasPermission(perm);
 	}
 
 }

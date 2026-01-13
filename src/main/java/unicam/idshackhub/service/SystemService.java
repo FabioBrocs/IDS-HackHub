@@ -3,7 +3,8 @@ package unicam.idshackhub.service;
 import unicam.idshackhub.model.hackathon.Hackathon;
 import unicam.idshackhub.model.hackathon.HackathonStaff;
 import unicam.idshackhub.model.hackathon.TeamRules;
-import unicam.idshackhub.model.user.role.HackathonRole;
+import unicam.idshackhub.model.user.BaseContext;
+import unicam.idshackhub.model.user.role.RoleType;
 import unicam.idshackhub.model.user.role.permission.Permission;
 import unicam.idshackhub.model.utils.Invite;
 import unicam.idshackhub.model.utils.Request;
@@ -38,14 +39,14 @@ public class SystemService extends Service {
 
 	public void AcceptInvite(User user, Invite invite,boolean accept) {
 		boolean hasRole = invite.getOwner()
-				.getContextByRole(HackathonRole.Organizator)
+				.getContextByRole(RoleType.H_Organizator)
 				.map(user::getRoleByContext)
 				.isPresent();
 		if(!hasRole){
 			if(accept){
-				invite.getOwner().getContextByRole(HackathonRole.Organizator)
+				invite.getOwner().getContextByRole(RoleType.H_Organizator)
 						.ifPresent(contex -> {
-							user.getAssignments().add(new Assignment(contex, HackathonRole.Judge));
+							user.getAssignments().add(new Assignment((BaseContext) contex, RoleType.H_Judge));
 						});
 			}
 		}else throw new SecurityException("l'utente fa già parte nell'hackathon");
@@ -67,16 +68,14 @@ public class SystemService extends Service {
 		}else throw new RuntimeException("Permission denied");
 	}
 
-	//TODO in teoria basta aggiungere nome, description e iban
-	public void createTeam(User user) {
+	public void createTeam(User user,String name,String description,String iban) {
 		if(checker.checkPermission(user, Permission.Can_Create_Team)){
 			TeamBuilder builder = new TeamBuilder();
-			builder.buildName("example")
-					.buildDescription("example")
+			builder.buildName(name)
+					.buildDescription(description)
 					.buildLeader(user)
 					.buildMembers(new ArrayList<>())
-					.buildIban("example");
+					.buildIban(iban);
 		}else throw new RuntimeException("Permission denied");
 	}
-
 }

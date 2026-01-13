@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import unicam.idshackhub.model.user.role.GlobalRole;
 import unicam.idshackhub.model.user.User;
+import unicam.idshackhub.model.user.role.RoleType;
 
 @Getter
 @Setter
@@ -22,6 +22,6 @@ public class Request {
 	}
 
 	public void Manage(boolean manage) {
-		if (manage) user.setRole(GlobalRole.VerifiedUser);
+		if (manage) user.setGlobalRole(RoleType.G_VerifiedUser);
 	}
 }

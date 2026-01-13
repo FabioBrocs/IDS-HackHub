@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import unicam.idshackhub.model.user.role.GlobalRole;
+import unicam.idshackhub.model.user.role.ContextType;
 import unicam.idshackhub.model.user.role.Role;
+import unicam.idshackhub.model.user.role.RoleType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Setter
@@ -21,8 +23,8 @@ public class User {
 	private String username;
 	private String email;
 	private String passwordHash;
-	private GlobalRole role;
-	@Transient private List<Assignment> assignments = new ArrayList<>();
+	private RoleType globalRole;
+	@ElementCollection private List<Assignment> assignments = new ArrayList<>();
 
 	@Override
 	public boolean equals(Object o) {
@@ -39,15 +41,16 @@ public class User {
 
 	public Optional<Role> getRoleByContext(Context context) {
 		return assignments.stream()
-				.filter(a -> a.getContext().equals(context))
-				.map(Assignment::getRole)
+				.filter(a -> context.equals(a.getContext()))
+				.map(a -> (Role) a.getRole())
 				.findFirst();
 	}
 
 	public Optional<Context> getContextByRole(Role role) {
 		return assignments.stream()
-				.filter(a-> a.getRole().equals(role))
+				.filter(a -> role.equals(a.getRole()))
 				.map(Assignment::getContext)
+				.map(Context.class::cast)
 				.findFirst();
 	}
 }

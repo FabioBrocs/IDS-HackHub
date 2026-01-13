@@ -1,18 +1,19 @@
 package unicam.idshackhub.model.user;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
-import unicam.idshackhub.model.user.role.Role;
+import unicam.idshackhub.model.user.role.RoleType;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-/*JPA gli sta molto antipatico il fatto di usare le interfacce per buttarle nel database
-pero vorrei evitare di togliere le interfacce o cambiare troppo la logica de programma
-per buttarci dentro jpa, la soluzione migliore sembrerebbe quella di usare dei converter */
 public class Assignment {
-	private Context context;
-	private Role role;
+	@ManyToOne
+	@JoinColumn(name = "context_id")
+	private BaseContext context; //in che contesto si applica hackathon o team
+	private RoleType role; //tipo di ruolo (capo, membro...)
 }

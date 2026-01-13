@@ -1,6 +1,6 @@
 package unicam.idshackhub.service;
 
-import unicam.idshackhub.model.user.role.TeamRole;
+import unicam.idshackhub.model.user.role.RoleType;
 import unicam.idshackhub.model.user.role.permission.Permission;
 import unicam.idshackhub.model.team.Team;
 import unicam.idshackhub.team.builder.HackathonTeamBuilder;
@@ -15,11 +15,15 @@ public class TeamService extends Service {
 	/**
 	 * 
 	 * @param teamLeader
-	 * @param HackathonTeam
+	 * @param hackathonTeam
 	 * @param hackathon
 	 */
-	public void registrateTeam(User teamLeader, HackathonTeam HackathonTeam, Hackathon hackathon) {
-
+	public void registrateTeam(User teamLeader, HackathonTeam hackathonTeam, Hackathon hackathon) {
+		if(checker.checkPermission(teamLeader, Permission.Can_Registrate_Team)) {
+			if(hackathon.getActualState().isActionAllowed(Permission.Can_Registrate_Team)) {
+				hackathon.getTeams().add(hackathonTeam);
+			}else throw new RuntimeException("Iscrizioni scadute");
+		}else throw new RuntimeException("Permission denied");
 	}
 
 	/**
@@ -28,23 +32,20 @@ public class TeamService extends Service {
 	 * @param hackathonTeamLeader
 	 * @param HackathonTeamMembers
 	 */
-	//TODO CHECK parametri
 	//TODO questo metodo è un macello pero funziona :)
-	public void createHackathonTeam(User teamLeader, User hackathonTeamLeader, List<User> HackathonTeamMembers, Hackathon hackathon) {
-		if(checker.checkPermission(teamLeader, Permission.Can_Create_HackathonTeam,null)){
+	public void createHackathonTeam(User teamLeader, User hackathonTeamLeader, List<User> HackathonTeamMembers) {
+		if(checker.checkPermission(teamLeader, Permission.Can_Create_HackathonTeam)){
 				HackathonTeamBuilder builder = new HackathonTeamBuilder();
 				builder.buildName("example");
 				builder.buildDescription("example");
-				builder.buildLeader(teamLeader);
+				builder.buildLeader(hackathonTeamLeader);
 				builder.buildMainTeam(
-						teamLeader.getContextByRole(TeamRole.TeamLeader)
+						teamLeader.getContextByRole(RoleType.T_TeamLeader)
 								.map(context -> (Team) context)
 								.orElseThrow(() -> new RuntimeException("Main Team non trovato"))
 				);
 				builder.buildMembers(HackathonTeamMembers);
-				builder.buildHackathonParticipation(hackathon);
 				HackathonTeam team = builder.getTeam();
-				hackathon.getTeams().add(team);
 		}
 	}
 
