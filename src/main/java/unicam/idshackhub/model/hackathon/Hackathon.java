@@ -4,10 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import unicam.idshackhub.model.hackathon.state.HackathonState;
 import unicam.idshackhub.model.hackathon.state.Registration;
-import unicam.idshackhub.model.user.BaseContext;
+import unicam.idshackhub.model.user.assignment.BaseContext;
 import unicam.idshackhub.model.utils.Submission;
 import unicam.idshackhub.model.team.HackathonTeam;
-import unicam.idshackhub.model.user.Context;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public class Hackathon extends BaseContext {
 	private String title;
 	private String description;
 	private TeamRules rules;
-	private HackathonStaff staff;
+	@Builder.Default private HackathonStaff staff = new HackathonStaff();
 	private Schedule schedule;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "hackathon_id")

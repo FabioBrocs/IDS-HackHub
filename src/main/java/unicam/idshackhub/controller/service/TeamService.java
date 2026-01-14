@@ -1,16 +1,18 @@
-package unicam.idshackhub.service;
+package unicam.idshackhub.controller.service;
 
 import unicam.idshackhub.model.user.role.RoleType;
 import unicam.idshackhub.model.user.role.permission.Permission;
 import unicam.idshackhub.model.team.Team;
-import unicam.idshackhub.team.builder.HackathonTeamBuilder;
+import unicam.idshackhub.model.team.builder.HackathonTeamBuilder;
 import unicam.idshackhub.model.user.User;
 import unicam.idshackhub.model.team.HackathonTeam;
 import unicam.idshackhub.model.hackathon.Hackathon;
 
 import java.util.List;
 
-public class TeamService extends Service {
+import static unicam.idshackhub.controller.service.PermissionChecker.checkPermission;
+
+public class TeamService{
 
 	/**
 	 * 
@@ -19,7 +21,7 @@ public class TeamService extends Service {
 	 * @param hackathon
 	 */
 	public void registrateTeam(User teamLeader, HackathonTeam hackathonTeam, Hackathon hackathon) {
-		if(checker.checkPermission(teamLeader, Permission.Can_Registrate_Team)) {
+		if(checkPermission(teamLeader, Permission.Can_Registrate_Team)) {
 			if(hackathon.getActualState().isActionAllowed(Permission.Can_Registrate_Team)) {
 				hackathon.getTeams().add(hackathonTeam);
 			}else throw new RuntimeException("Iscrizioni scadute");
@@ -33,11 +35,11 @@ public class TeamService extends Service {
 	 * @param HackathonTeamMembers
 	 */
 	//TODO questo metodo è un macello pero funziona :)
-	public void createHackathonTeam(User teamLeader, User hackathonTeamLeader, List<User> HackathonTeamMembers) {
-		if(checker.checkPermission(teamLeader, Permission.Can_Create_HackathonTeam)){
+	public void createHackathonTeam(User teamLeader,String name,String description, User hackathonTeamLeader, List<User> HackathonTeamMembers) {
+		if(checkPermission(teamLeader, Permission.Can_Create_HackathonTeam)){
 				HackathonTeamBuilder builder = new HackathonTeamBuilder();
-				builder.buildName("example");
-				builder.buildDescription("example");
+				builder.buildName(name);
+				builder.buildDescription(description);
 				builder.buildLeader(hackathonTeamLeader);
 				builder.buildMainTeam(
 						teamLeader.getContextByRole(RoleType.T_TeamLeader)

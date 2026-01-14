@@ -1,4 +1,4 @@
-package unicam.idshackhub.team.builder;
+package unicam.idshackhub.model.team.builder;
 
 import unicam.idshackhub.model.hackathon.Hackathon;
 import unicam.idshackhub.model.utils.Submission;

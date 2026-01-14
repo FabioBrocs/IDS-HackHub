@@ -3,7 +3,7 @@ package unicam.idshackhub.model.team;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import unicam.idshackhub.model.user.BaseContext;
+import unicam.idshackhub.model.user.assignment.BaseContext;
 import unicam.idshackhub.model.user.User;
 
 import java.util.ArrayList;

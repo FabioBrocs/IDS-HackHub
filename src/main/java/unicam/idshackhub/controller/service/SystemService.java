@@ -1,27 +1,30 @@
-package unicam.idshackhub.service;
+package unicam.idshackhub.controller.service;
 
 import unicam.idshackhub.model.hackathon.Hackathon;
 import unicam.idshackhub.model.hackathon.HackathonStaff;
+import unicam.idshackhub.model.hackathon.Schedule;
 import unicam.idshackhub.model.hackathon.TeamRules;
-import unicam.idshackhub.model.user.BaseContext;
+import unicam.idshackhub.model.user.assignment.BaseContext;
 import unicam.idshackhub.model.user.role.RoleType;
 import unicam.idshackhub.model.user.role.permission.Permission;
 import unicam.idshackhub.model.utils.Invite;
 import unicam.idshackhub.model.utils.Request;
-import unicam.idshackhub.team.builder.TeamBuilder;
-import unicam.idshackhub.model.user.Assignment;
+import unicam.idshackhub.model.team.builder.TeamBuilder;
+import unicam.idshackhub.model.user.assignment.Assignment;
 import unicam.idshackhub.model.user.User;
 
 import java.util.ArrayList;
 
-public class SystemService extends Service {
+import static unicam.idshackhub.controller.service.PermissionChecker.checkPermission;
+
+public class SystemService{
 
 	/**
 	 * 
 	 * @param user
 	 */
 	public void createRequest(User user,String description) {
-		if(checker.checkPermission(user, Permission.Can_Create_Request)){
+		if(checkPermission(user, Permission.Can_Create_Request)){
 			Request request = new Request(user,description);
 		}else throw new RuntimeException("Permission denied");
 	}
@@ -32,7 +35,7 @@ public class SystemService extends Service {
 	 * @param request
 	 */
 	public void manageRequest(User admin, Request request,boolean manage) {
-		if(checker.checkPermission(admin, Permission.Can_Manage_Request)){
+		if(checkPermission(admin, Permission.Can_Manage_Request)){
 			request.Manage(manage);
 		}else throw new RuntimeException("Permission denied");
 	}
@@ -56,20 +59,19 @@ public class SystemService extends Service {
 	 * 
 	 * @param verifiedUser
 	 */
-	public void createHackathon(User verifiedUser) {
-		if(checker.checkPermission(verifiedUser, Permission.Can_Create_HackathonTeam)){
+	public void createHackathon(User verifiedUser, String title, String description, TeamRules teamRules, Schedule schedule) {
+		if(checkPermission(verifiedUser, Permission.Can_Create_HackathonTeam)){
 			Hackathon.builder()
-					.title("Hackathon")
-					.description("Hackathon")
-					.rules(new TeamRules(2,1,3,2))
-					.staff(new HackathonStaff(verifiedUser,null))
-					//.schedule(new Schedule())
+					.title(title)
+					.description(description)
+					.rules(teamRules)
+					.schedule(schedule)
 					.build();
 		}else throw new RuntimeException("Permission denied");
 	}
 
 	public void createTeam(User user,String name,String description,String iban) {
-		if(checker.checkPermission(user, Permission.Can_Create_Team)){
+		if(checkPermission(user, Permission.Can_Create_Team)){
 			TeamBuilder builder = new TeamBuilder();
 			builder.buildName(name)
 					.buildDescription(description)

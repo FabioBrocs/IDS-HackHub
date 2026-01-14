@@ -1,11 +1,13 @@
-package unicam.idshackhub.service;
+package unicam.idshackhub.controller.service;
 
 import unicam.idshackhub.model.user.role.permission.Permission;
 import unicam.idshackhub.model.utils.Invite;
 import unicam.idshackhub.model.user.User;
 import unicam.idshackhub.model.hackathon.Hackathon;
 
-public class HackathonService extends Service {
+import static unicam.idshackhub.controller.service.PermissionChecker.checkPermission;
+
+public class HackathonService{
 
 	/**
 	 * 
@@ -13,7 +15,7 @@ public class HackathonService extends Service {
 	 * @param hackathon
 	 */
 	public void ProclamateWinner(User organizator, Hackathon hackathon) {
-		if(checker.checkPermission(organizator, Permission.Can_Proclamate_Winner,hackathon)){
+		if(checkPermission(organizator, Permission.Can_Proclamate_Winner,hackathon)){
 			if(hackathon.getActualState().isActionAllowed(Permission.Can_Proclamate_Winner)){
 				//TODO logica proclamazione vincitore
 			}throw new SecurityException("L'Hackathon non è ancora in fase conclusiva");
@@ -29,7 +31,7 @@ public class HackathonService extends Service {
 	 * @param judge
 	 */
 	public void inviteJudge(User organizator,Hackathon hackathon, User judge) {
-		if(checker.checkPermission(organizator,Permission.Can_Invite_Judge,hackathon)){
+		if(checkPermission(organizator,Permission.Can_Invite_Judge,hackathon)){
 			if(hackathon.getActualState().isActionAllowed(Permission.Can_Invite_Judge)){
 				if(judge.getRoleByContext(hackathon).isEmpty()){
 					Invite inviteJudge= new Invite(organizator,"ciao!",judge);

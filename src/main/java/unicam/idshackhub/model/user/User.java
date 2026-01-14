@@ -4,13 +4,13 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import unicam.idshackhub.model.user.role.ContextType;
+import unicam.idshackhub.model.user.assignment.Assignment;
+import unicam.idshackhub.model.user.assignment.Context;
 import unicam.idshackhub.model.user.role.Role;
 import unicam.idshackhub.model.user.role.RoleType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Setter

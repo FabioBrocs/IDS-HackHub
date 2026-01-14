@@ -1,4 +1,4 @@
-package unicam.idshackhub.model.user;
+package unicam.idshackhub.model.user.assignment;
 
 import jakarta.persistence.Embeddable;
 
