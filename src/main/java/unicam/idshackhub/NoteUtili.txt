@@ -1,0 +1,6 @@
+-probabilmente il jpa non funziona bene dato che dentro intellij non si creano le tabelle
+-ci sarebbe da creare dei test di esempio
+-non sono sicuro che i builder di team vanno fatti cosi
+-penso di aver messo troppe annotation a cazzo di cane :)
+-i transient sono per evitare errori di jpa
+-odio jpa :(
